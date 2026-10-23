@@ -1,0 +1,7 @@
+{
+  "name": "IoT CyberShield - OTA Update Verification & 3D Attack Simulation",
+  "description": "IoT CyberShield platform featuring an automated OTA firmware update server with valid and invalid sample generation, Ed25519 cryptographic verification, and real-time 3D attack simulation.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

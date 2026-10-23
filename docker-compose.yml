@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  # IoT CyberShield Backend & Control Platform
+  cybershield-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cybershield-platform
+    user: "1000:1000"
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    volumes:
+      - ./data:/app/data
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+    networks:
+      - cybershield-net
+    security_opt:
+      - no-new-privileges:true
+    read_only: false
+
+  # Device 1: TP-Link Tapo C200 Reference Camera Emulator
+  emulator-camera:
+    image: alpine:3.20
+    container_name: emulator-tapo-c200
+    user: "1001:1001"
+    command: ["sh", "-c", "echo 'Tapo C200 RTSP Emulation Service Running on :554' && while true; do sleep 30; done"]
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
+    networks:
+      - cybershield-net
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  # Device 2: ESP32 Smart Locker Reference Access Controller Emulator
+  emulator-locker:
+    image: alpine:3.20
+    container_name: emulator-esp32-locker
+    user: "1001:1001"
+    command: ["sh", "-c", "echo 'ESP32 4x4 Keypad & 12V Solenoid Emulation Active' && while true; do sleep 30; done"]
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+    networks:
+      - cybershield-net
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  # Device 3: DHT22 / AM2302 Environmental Sensor Emulator
+  emulator-sensor:
+    image: alpine:3.20
+    container_name: emulator-dht22-sensor
+    user: "1001:1001"
+    command: ["sh", "-c", "echo 'DHT22 Digital Capacitive Temperature/Humidity Sensor Emulation Active' && while true; do sleep 30; done"]
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.25'
+          memory: 128M
+    networks:
+      - cybershield-net
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  # Device 4: TP-Link Archer C6 Network Router Emulator
+  emulator-router:
+    image: alpine:3.20
+    container_name: emulator-archer-c6
+    user: "1001:1001"
+    command: ["sh", "-c", "echo 'Archer C6 AC1200 MU-MIMO Router Firewall & Gateway Emulation Active' && while true; do sleep 30; done"]
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
+    networks:
+      - cybershield-net
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+networks:
+  cybershield-net:
+    driver: bridge

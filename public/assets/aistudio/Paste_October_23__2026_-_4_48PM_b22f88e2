@@ -1,0 +1,921 @@
+PROJECT: IoT CyberShield
+
+AI-Assisted IoT Firmware Security, Virtual Device Emulation and Attack Impact Visualization Platform
+
+Act as a senior full-stack developer, IoT cybersecurity engineer, backend architect, and UI/UX designer.
+
+Build a complete, functional, responsive web application named IoT CyberShield.
+
+This is a college hackathon project focused on securing firmware updates for IoT devices using software-based emulation. The application must demonstrate firmware integrity checking, digital signature verification, rollback protection, secure update workflows, virtual IoT devices, controlled attack simulations, and security impact visualization.
+
+IMPORTANT:
+
+- Do not build only a frontend prototype.
+- Implement working frontend interactions and backend APIs.
+- Use real security checks where specified.
+- Do not pretend that simulated results are real security scans.
+- Do not invent successful verification results.
+- Do not use hardcoded dashboard numbers that contradict the actual database.
+- Do not leave buttons nonfunctional.
+- Do not implement dangerous attacks against real devices.
+- Use isolated simulations and harmless test files.
+- Explain any feature that cannot be implemented in the current environment.
+- Complete and test the core application before adding unnecessary features.
+
+1. REQUIRED TECHNOLOGY STACK
+
+Use the following architecture.
+
+Frontend:
+
+- React
+- TypeScript
+- Vite
+- CSS or Tailwind CSS
+- Three.js for optional interactive 3D device visualization
+- Lucide icons or another consistent icon library
+
+Backend:
+
+- Node.js
+- Express.js
+- TypeScript
+
+Database:
+
+- SQLite for persistent local development storage
+
+Security:
+
+- Node.js crypto module for SHA-256 hashing and cryptographic operations
+- Ed25519 digital signatures for firmware authenticity verification
+- Server-side validation for all uploaded files
+- Strict firmware version validation
+- Unique update identifiers and replay protection
+
+Testing:
+
+- Vitest or an equivalent testing framework
+- Supertest for backend API tests
+
+Emulation:
+
+- First implement a safe software-based virtual IoT device simulator.
+- Structure the application so Docker-based emulation can be added later.
+- Do not claim that Docker, QEMU, secure hardware boot, or a real device has been emulated unless it has actually been implemented and tested.
+
+Keep the frontend and backend separated into clearly organized folders.
+
+2. APPLICATION DESIGN
+
+Create a professional cybersecurity dashboard with a dark charcoal background, cyan and teal accents, subtle orange warning colors, clear typography, and clean spacing.
+
+The interface should look like a modern IoT security operations center.
+
+Include:
+
+- Responsive sidebar navigation
+- Top navigation bar
+- Device status indicators
+- Security event feed
+- Firmware upload panel
+- Interactive device cards
+- Device details pages
+- Attack simulation panel
+- Emulation controls
+- Security reports
+- Loading indicators
+- Error messages
+- Empty states
+- Confirmation dialogs for destructive actions
+
+The interface must work on desktop, tablet, and mobile screens.
+
+Use accessible buttons, readable labels, keyboard navigation, and clear status text. Do not rely on colors alone to explain security results.
+
+3. NAVIGATION STRUCTURE
+
+Create these sidebar sections:
+
+1. Dashboard
+2. Virtual Devices
+3. Firmware Lab
+4. Emulation Lab
+5. Attack Simulator
+6. Security Verification
+7. Security Logs
+8. Performance Testing
+9. Settings
+
+Each section must open a functional page or panel.
+
+The active navigation item must be highlighted.
+
+4. DASHBOARD
+
+Create a dashboard that obtains its information from the backend.
+
+Display:
+
+- Total registered virtual devices
+- Online simulated devices
+- Devices requiring attention
+- Firmware tests completed
+- Updates approved
+- Updates rejected
+- Recent security events
+- Device security status summary
+- Latest emulation sessions
+
+Dashboard counts must come from database records or actual application state.
+
+When no data exists, show zero or a helpful empty state rather than fake statistics.
+
+Add working navigation buttons:
+
+- Register Device
+- Upload Firmware
+- Start Emulation
+- Open Attack Simulator
+
+5. VIRTUAL DEVICES
+
+Create a Virtual Devices page with a submenu and device categories.
+
+Provide these example device types:
+
+- Smart Security Camera
+- Temperature and Humidity Sensor
+- Motion Sensor
+- Smart Lock
+- Smart Router
+
+These are simulated devices, not physical devices.
+
+Each device should have:
+
+- Unique device ID
+- Device name
+- Device type
+- Firmware version
+- Device status
+- Security status
+- Last update timestamp
+- Current simulation state
+- Device configuration
+- Update history
+
+Allow the user to:
+
+- Add a virtual device
+- Open device details
+- Start and stop its simulation
+- Edit permitted configuration
+- Remove a device after confirmation
+- View associated firmware tests
+- View associated security events
+
+Persist device information in SQLite.
+
+Provide sensible default example devices, but identify them clearly as demonstration devices.
+
+Do not allow device IDs to be duplicated.
+
+6. HOLOGRAM-STYLE 3D DEVICE VISUALIZATION
+
+Create an interactive visualization for the selected virtual device.
+
+Use Three.js when feasible.
+
+Show a recognizable 3D representation of:
+
+- A smart camera
+- An environmental sensor
+- A motion sensor
+- A smart lock
+- A router
+
+Use a holographic visual style with:
+
+- Cyan wireframe edges
+- Transparent-looking surfaces
+- Scanning rings
+- Animated data pulses
+- Firmware transfer animation
+- A central security shield
+- Device status indicators
+
+If a full 3D model is unavailable, use a polished procedural 3D model or an SVG/CSS illustration. Do not make the application unusable when 3D rendering is unavailable.
+
+The visualization must reflect actual application state.
+
+For example:
+
+- Idle: device is stationary.
+- Running: normal activity indicators are visible.
+- Firmware verification: scanning animation is displayed.
+- Update accepted: green or teal success indicators appear.
+- Update rejected: red warning indicators appear.
+- Device service failure: highlight the simulated affected component.
+- Device stopped: show a stopped status.
+
+Provide a pause or stop option for animations where appropriate.
+
+IMPORTANT:
+The hologram is a visualization. It must not be described as a physical hologram or as proof that actual hardware is connected.
+
+7. FIRMWARE LAB
+
+Create a complete firmware testing workflow.
+
+Allow the user to:
+
+- Select a target virtual device
+- Upload a firmware test file
+- View the filename
+- View file size
+- Calculate its SHA-256 hash on the backend
+- View the detected file format
+- View the expected firmware version
+- Submit the file for security verification
+- View the results of each verification step
+
+Implement server-side upload validation.
+
+Security requirements:
+
+- Limit file size to a configurable value, initially 10 MB.
+- Use generated server-side filenames.
+- Never execute uploaded files.
+- Never run uploaded files as shell commands.
+- Store uploads in a dedicated non-public directory.
+- Prevent path traversal.
+- Reject empty files and malformed requests.
+- Clean up temporary files when appropriate.
+- Apply a request size limit.
+- Never expose private signing keys or internal filesystem paths.
+
+A plain-text file such as safe_firmware_test.txt must be recognized as a harmless test sample, not as real firmware.
+
+The application must not approve a text file as deployable firmware simply because its contents say it is safe.
+
+Support a clearly defined firmware test format for the software simulator. Document the format, required metadata, expected hash, and signature requirements.
+
+Use a sample package format that can be generated and validated locally. For example, define a ZIP package containing:
+
+- manifest.json
+- firmware.bin
+- firmware.sig
+
+The manifest must specify:
+
+- Package format version
+- Device type
+- Firmware version
+- Minimum supported version
+- Firmware SHA-256 hash
+- Unique update ID
+- Signing key identifier
+
+Validate the ZIP structure and reject unexpected files, duplicate entries, path traversal entries, oversized expanded content, and malformed metadata.
+
+Do not extract uploaded ZIP files directly to arbitrary filesystem locations.
+
+Calculate the hash from the actual firmware.bin bytes and compare it with the manifest hash.
+
+Never trust the manifest hash without independently hashing the firmware contents.
+
+8. DIGITAL SIGNATURE VERIFICATION
+
+Implement genuine digital signature verification.
+
+Use Ed25519 public/private key cryptography.
+
+Provide a development-only command or script to generate a test signing key pair.
+
+Keep the private key outside the public web directory and never send it to the frontend.
+
+For each firmware package:
+
+1. Parse and validate the manifest.
+2. Calculate the actual firmware SHA-256 hash.
+3. Compare it with the manifest hash.
+4. Canonicalize the signed manifest fields using one documented, deterministic procedure.
+5. Verify the signature using the trusted public key associated with the key ID.
+6. Reject unknown keys.
+7. Reject invalid signatures.
+8. Reject hash mismatches.
+9. Record the verification result.
+
+Use a documented signature scheme and ensure that the package-generation utility signs exactly the same bytes that the verification code checks.
+
+Do not use a user-provided boolean or a field such as signatureValid=true as proof of authenticity.
+
+Provide a utility to generate legitimate test packages locally using the development private key.
+
+Display each result separately:
+
+- Package structure
+- Firmware hash
+- Signature verification
+- Device compatibility
+- Version policy
+- Replay protection
+
+The overall result must be rejected if any mandatory check fails.
+
+9. ROLLBACK PROTECTION
+
+Implement version policy on the backend.
+
+Each device must have a stored current firmware version.
+
+When a firmware update is submitted:
+
+- Compare the requested version with the current version.
+- Reject an unauthorized downgrade.
+- Reject a version that violates the package's minimum supported version.
+- Allow only policy-compliant updates.
+- Store the accepted version persistently.
+
+Use a documented numeric version scheme, such as major.minor.patch.
+
+Do not compare versions using ordinary alphabetical string sorting.
+
+Provide a clearly labelled development-only option for authorized recovery or factory-reset demonstrations. Never let an uploaded manifest disable rollback protection.
+
+Test normal upgrades, unauthorized downgrades, and malformed versions.
+
+10. REPLAY PROTECTION
+
+Implement persistent replay protection.
+
+Each firmware update package must contain a unique update ID.
+
+Store accepted update IDs in SQLite with the target device ID.
+
+Reject a previously accepted update ID for the same device.
+
+Use database transactions to avoid duplicate acceptance during concurrent requests.
+
+Clearly distinguish:
+
+- Previously accepted update
+- Rejected update
+- New update that has passed all checks
+
+Do not rely only on an in-memory array.
+
+11. EMULATION LAB
+
+Implement a working software-based virtual IoT device simulator.
+
+Each device should have a state machine with states such as:
+
+- STOPPED
+- RUNNING
+- VERIFYING
+- UPDATING
+- HEALTHY
+- DEGRADED
+- UPDATE_REJECTED
+
+Define legal transitions between states.
+
+Allow the user to:
+
+- Start a simulated device
+- Stop a simulated device
+- Submit a firmware update
+- Observe verification progress
+- Observe the update decision
+- Observe the device's resulting state
+- View a timestamped event timeline
+
+The simulator must never execute uploaded firmware.
+
+Instead, model a firmware update by validating the package and updating the simulated device's firmware version only after all required security checks pass.
+
+When an update is rejected, the simulated device must retain its previous trusted firmware version.
+
+Provide a clearly labelled simulation mode so judges understand which behaviors are simulated.
+
+12. ATTACK SIMULATOR
+
+Create controlled security test scenarios using harmless, locally generated test packages.
+
+Include:
+
+A. Invalid signature
+
+- Generate a test package with a deliberately invalid signature.
+- Expect the signature check to fail.
+- Reject the update.
+
+B. Modified firmware
+
+- Change the firmware bytes after signing the package.
+- Expect the hash comparison or signature verification to fail.
+- Reject the update.
+
+C. Unauthorized downgrade
+
+- Submit an older firmware version than the device currently uses.
+- Expect rollback protection to reject the update.
+
+D. Replay attempt
+
+- Submit an update ID that has already been accepted for the same device.
+- Expect replay protection to reject the update.
+
+E. Unknown signing key
+
+- Use a key ID that is not trusted.
+- Expect the package to be rejected.
+
+F. Malformed package
+
+- Submit a package with missing metadata, invalid JSON, duplicate entries, or an invalid structure.
+- Expect the package validation to fail safely.
+
+For every scenario:
+
+- Show the selected device.
+- Explain the scenario.
+- Run the corresponding backend validation.
+- Show the actual result.
+- Explain why the package was accepted or rejected.
+- Record the result in the security log.
+
+Do not claim an attack was detected unless the relevant check actually ran.
+
+Do not create destructive malware or attack real devices.
+
+13. ATTACK IMPACT VISUALIZATION
+
+Create a dedicated impact panel connected to the simulator.
+
+When a security test identifies a problem, display:
+
+- The security check that failed
+- The affected virtual device
+- The potentially affected software component
+- The possible consequence
+- The defensive action taken
+- The resulting device status
+
+Examples:
+
+Smart Camera:
+
+- Potential component: video service
+- Possible impact: video service interruption or loss of availability
+
+Environmental Sensor:
+
+- Potential component: measurement service
+- Possible impact: missing or unreliable readings
+
+Smart Lock:
+
+- Potential component: simulated access-control service
+- Possible impact: access-control service disruption
+
+Router:
+
+- Potential component: simulated network service
+- Possible impact: loss of simulated network connectivity
+
+Use the 3D visualization to highlight the relevant component.
+
+IMPORTANT:
+Do not claim that a particular malicious firmware file definitely causes a specific effect unless the simulator has actually reproduced that effect.
+
+For untested scenarios, use the label "Potential impact — illustrative simulation."
+
+For a rejected firmware package, demonstrate that the simulated device keeps its last trusted firmware version.
+
+For an accepted update, show the new version only after all mandatory security checks pass.
+
+14. SECURE BOOT SIMULATION
+
+Implement a software demonstration of secure boot policy.
+
+Store a simulated boot record for each device.
+
+When a virtual device starts:
+
+- Check whether its configured firmware hash matches the expected trusted hash.
+- Check whether the firmware is associated with an approved signing key.
+- Verify the stored firmware version and policy.
+- Allow the simulated boot only if required checks pass.
+
+If verification fails:
+
+- Mark the device as blocked from simulated startup.
+- Record the failure.
+- Display a clear explanation.
+- Keep the previous trusted state where possible.
+
+Clearly label this as a secure boot simulation, not a hardware root-of-trust implementation.
+
+15. REMOTE ATTESTATION SIMULATION
+
+Implement a remote-attestation demonstration for virtual devices.
+
+Generate an attestation report containing:
+
+- Device ID
+- Current firmware version
+- Firmware hash
+- Timestamp
+- Unique challenge nonce
+- Security policy version
+- Verification outcome
+
+Generate a fresh unpredictable nonce for each challenge.
+
+Bind the report to the challenge so that an old report cannot simply be reused as a fresh response.
+
+Authenticate the report using a development signing key or a documented simulated trust mechanism.
+
+Verify the report on the server.
+
+Reject invalid signatures, stale challenges, reused nonces, and mismatched device state.
+
+Explain that this is software-based remote attestation and does not establish hardware-backed trust.
+
+16. ANOMALY DETECTION
+
+Implement basic rule-based anomaly detection on simulated device telemetry.
+
+Examples:
+
+- Repeated firmware verification failures
+- Unexpected device state transitions
+- Excessive update attempts
+- Repeated replay attempts
+- Unusual simulated CPU or memory readings
+- Unexpected restart frequency
+
+Generate deterministic test events so these rules can be demonstrated and tested.
+
+For each alert, show:
+
+- Alert category
+- Severity
+- Triggering evidence
+- Timestamp
+- Recommended response
+
+Do not claim that a machine-learning model is running unless one is actually implemented.
+
+Rule-based anomaly detection is acceptable for the first working version.
+
+17. SECURITY LOGS
+
+Create a persistent event log using SQLite.
+
+Each event should contain:
+
+- Event ID
+- Timestamp
+- Device ID, if applicable
+- Event type
+- Severity
+- Description
+- Relevant update ID
+- Verification result
+- Structured reason code
+
+Record events for:
+
+- Device creation and deletion
+- Device start and stop
+- Firmware upload
+- Hash verification
+- Signature verification
+- Rollback rejection
+- Replay rejection
+- Secure boot verification
+- Attestation checks
+- Attack simulation
+- Update acceptance or rejection
+
+Add:
+
+- Search
+- Filtering by device
+- Filtering by severity
+- Filtering by event type
+- Pagination
+- CSV export
+
+Do not store private signing keys or unnecessary sensitive file contents in logs.
+
+18. PERFORMANCE TESTING
+
+Create a performance test page.
+
+Measure actual elapsed time for:
+
+- Firmware hashing
+- Digital signature verification
+- Manifest validation
+- Complete security verification
+- Simulated firmware update processing
+
+Run repeatable tests against local sample packages.
+
+Display:
+
+- Number of test runs
+- Average duration
+- Minimum duration
+- Maximum duration
+- Success and failure counts
+
+Use a reliable timer and record measured results.
+
+Where memory or CPU measurements are unavailable or unreliable, clearly explain the limitation instead of inventing values.
+
+Distinguish simulated device processing time from real host-machine performance.
+
+19. SETTINGS
+
+Implement:
+
+- Application settings
+- Maximum upload size
+- Trusted signing-key management
+- Firmware policy settings
+- Device simulation defaults
+- Log retention configuration
+
+For the initial version, use local development keys.
+
+Do not allow public users to upload arbitrary keys and automatically trust them without an explicit trusted-administrator action.
+
+Protect administrative operations with authentication or an explicitly documented local-development restriction.
+
+Never expose private keys through API responses.
+
+20. BACKEND API
+
+Create REST APIs with clear validation and error handling.
+
+Include endpoints similar to:
+
+GET /api/health
+GET /api/dashboard
+GET /api/devices
+POST /api/devices
+GET /api/devices/:id
+PATCH /api/devices/:id
+DELETE /api/devices/:id
+POST /api/devices/:id/start
+POST /api/devices/:id/stop
+POST /api/firmware/upload
+POST /api/firmware/:id/verify
+POST /api/devices/:id/updates
+GET /api/devices/:id/updates
+POST /api/devices/:id/attestation/challenge
+POST /api/devices/:id/attestation/verify
+POST /api/simulations
+GET /api/simulations/:id
+GET /api/logs
+GET /api/performance/results
+POST /api/performance/run
+
+You may adjust the endpoint design if needed, but implement the equivalent functionality.
+
+Use:
+
+- Appropriate HTTP status codes
+- Structured JSON responses
+- Input validation
+- Centralized error handling
+- Request timeouts where appropriate
+- Safe file handling
+- Rate limiting for sensitive endpoints
+
+Never expose stack traces, secrets, or sensitive filesystem paths to normal users.
+
+21. DATABASE DESIGN
+
+Create persistent tables for:
+
+- devices
+- firmware_packages
+- firmware_updates
+- trusted_signing_keys
+- accepted_update_ids
+- simulation_sessions
+- security_events
+- attestation_challenges
+- attestation_reports
+- performance_results
+- application_settings
+
+Use migrations or a documented schema initialization process.
+
+Add appropriate indexes and foreign keys.
+
+Use database transactions where multiple records must change together.
+
+On application restart, previously stored devices, firmware metadata, accepted update IDs, and security logs must remain available.
+
+22. TEST FILE GENERATOR
+
+Provide a local development script that generates sample firmware packages.
+
+It must create:
+
+1. A correctly signed valid package.
+2. A package with an invalid signature.
+3. A package with modified firmware bytes.
+4. A package representing an unauthorized downgrade.
+5. A package with an unknown signing key.
+6. A malformed package.
+7. A replay demonstration using an already accepted update ID.
+
+Use harmless binary test payloads. Never execute them.
+
+For each package, document the expected result.
+
+A valid package must pass verification only if its hash, signature, device compatibility, version policy, and replay checks all pass.
+
+Provide a separate harmless plain-text sample for testing the upload interface. Do not classify that text file as deployable firmware.
+
+23. PROJECT STRUCTURE
+
+Organize the code clearly, for example:
+
+iot-cybershield/
+frontend/
+src/
+components/
+pages/
+services/
+types/
+visualization/
+backend/
+src/
+routes/
+services/
+middleware/
+database/
+simulator/
+security/
+utils/
+scripts/
+generate-test-keys
+generate-test-packages
+tests/
+uploads/
+README.md
+package.json
+.env.example
+
+You may adjust this structure if a simpler architecture is better, but keep security-sensitive logic in the backend.
+
+Do not place private keys, uploads, database files, or environment secrets inside the public frontend directory.
+
+24. REQUIRED ERROR HANDLING
+
+Handle:
+
+- Unsupported file type
+- Empty file
+- Oversized upload
+- Invalid ZIP package
+- Missing manifest
+- Invalid manifest
+- Hash mismatch
+- Invalid signature
+- Unknown signing key
+- Unauthorized downgrade
+- Replay attempt
+- Unknown device ID
+- Device not running
+- Database errors
+- Missing environment configuration
+- Frontend/backend connection failure
+
+Show useful error messages to the user.
+
+The application must not crash because of a malformed upload.
+
+25. AUTOMATED TESTS
+
+Write automated tests for at least:
+
+- Creating and listing devices
+- Starting and stopping virtual devices
+- Hashing a valid firmware file
+- Accepting a correctly signed package
+- Rejecting an invalid signature
+- Rejecting a firmware hash mismatch
+- Rejecting an unauthorized downgrade
+- Rejecting a replayed update ID
+- Rejecting an unknown signing key
+- Rejecting malformed packages
+- Preserving device firmware after a rejected update
+- Recording security events
+- Rejecting invalid attestation reports
+- Preventing duplicate device IDs
+
+Run the tests and fix failures before declaring the application complete.
+
+Do not report tests as passing unless they were actually executed.
+
+26. README AND RUNNING INSTRUCTIONS
+
+Write a clear README for a beginner.
+
+Explain:
+
+- Required software
+- How to install dependencies
+- How to initialize the database
+- How to generate development keys
+- How to generate sample firmware packages
+- How to start the backend
+- How to start the frontend
+- How to run automated tests
+- How to upload a valid sample package
+- How to demonstrate each rejected package
+- How to view the attack impact visualization
+- Which features are simulated
+- Which security checks are implemented
+- Known limitations
+
+Include an .env.example without actual secrets.
+
+Use simple instructions suitable for a college student using VS Code.
+
+27. DEVELOPMENT WORKFLOW
+
+Build the project in stages.
+
+Stage 1:
+Create the working frontend, backend, database, navigation, device management, and dashboard.
+
+Stage 2:
+Implement secure firmware packaging, hashing, signature verification, version checking, and replay protection.
+
+Stage 3:
+Implement the software device simulator and update state machine.
+
+Stage 4:
+Connect the holographic visualization to actual simulator states.
+
+Stage 5:
+Implement attack demonstrations, secure boot simulation, remote attestation, and rule-based anomaly detection.
+
+Stage 6:
+Implement logs, performance tests, automated tests, and documentation.
+
+At each stage:
+
+- Keep the application runnable.
+- Check for TypeScript and build errors.
+- Test the relevant API endpoints.
+- Fix broken imports and dependencies.
+- Update the README.
+
+If the environment cannot support a feature, explain the limitation and provide a working local implementation where possible.
+
+28. ACCEPTANCE CRITERIA
+
+The application is not complete until the following workflow works:
+
+1. Start the application.
+2. Open the dashboard.
+3. Create or select a virtual smart camera.
+4. Start the simulated device.
+5. Generate a valid signed firmware test package.
+6. Upload and verify the package.
+7. Confirm that the server validates the actual firmware hash and digital signature.
+8. Confirm that the device version changes only after all required checks pass.
+9. Upload a package with an invalid signature.
+10. Confirm that the update is rejected.
+11. Confirm that the device keeps its previous firmware version.
+12. Observe the rejected update on the holographic visualization.
+13. View the specific failed security check and the potential impact.
+14. Open the security logs and verify that the event was recorded.
+15. Attempt to replay an accepted update and confirm rejection.
+16. Restart the application and confirm that persistent records remain.
+17. Run automated tests and report the actual results.
+
+FINAL INSTRUCTION
+
+Prioritize correctness, security, and working functionality over decorative effects.
+
+Generate the actual project files, not just snippets or a written explanation.
+
+If the development environment supports file creation, create the complete project and provide a downloadable ZIP. If it only supports editing a connected repository, make the changes directly in that repository.
+
+Do not claim that the application is production-secure merely because the demo works. Document the limitations of local development keys, simulated devices, and software-based attestation.
+
+Begin by inspecting the current project and its files if they are available. Preserve working functionality, explain any necessary breaking changes, and then implement the project in manageable stages.

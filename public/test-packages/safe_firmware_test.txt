@@ -1,0 +1,3 @@
+SAFE_FIRMWARE_TEST_FILE
+This file is a harmless plain-text file. It is NOT valid deployable binary firmware.
+IoT CyberShield must identify this as text and reject it from firmware installation.

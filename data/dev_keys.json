@@ -1,0 +1,20 @@
+{
+  "dev-ed25519-primary": {
+    "keyId": "dev-ed25519-primary",
+    "name": "Primary Hardware Root Signer (Dev)",
+    "publicKeyHex": "9bb622e735e4c327db60253fd41bf31569c6c3c68f61831c07e2416019cd9f11",
+    "privateKeyPem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEILPhfoxs5xwm47wjoHmSsaYtPiM6oUTpF0suq6lM2wD4\n-----END PRIVATE KEY-----\n"
+  },
+  "dev-ed25519-secondary": {
+    "keyId": "dev-ed25519-secondary",
+    "name": "Secondary Field Update Signer (Dev)",
+    "publicKeyHex": "c12b527cd817754689fbc5623024da1412e66d22af70feba9eb1eca4294f1558",
+    "privateKeyPem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEIB4kzVBl96exCyhQpSzO5x/cO85q6Nsx85ZItL2JBcZh\n-----END PRIVATE KEY-----\n"
+  },
+  "untrusted-rogue-key-999": {
+    "keyId": "untrusted-rogue-key-999",
+    "name": "Adversary Unauthorized Signer",
+    "publicKeyHex": "da7658f92b4df4240c7064d52dee6c0f2c039cb8adbab0f1757ad7865b850308",
+    "privateKeyPem": "-----BEGIN PRIVATE KEY-----\nMC4CAQAwBQYDK2VwBCIEID0OptgtMGHsQCKqRrtv2oZ2ZHoZlL8uDGEio44Eh4A+\n-----END PRIVATE KEY-----\n"
+  }
+}

@@ -1,0 +1,1231 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IoT CyberShield</title>
+  <meta name="description" content="IoT CyberShield platform featuring an automatic firmware update server with valid and invalid sample generation, Ed25519 cryptographic verification, and real-time 3D attack simulation.">
+  <meta property="og:title" content="IoT CyberShield">
+  <meta property="og:description" content="IoT CyberShield platform featuring an automatic firmware update server with valid and invalid sample generation, Ed25519 cryptographic verification, and real-time 3D attack simulation.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">◇</div>
+      <div>
+        <strong>IoT CyberShield</strong>
+        <small>SECURE OTA PLATFORM</small>
+      </div>
+    </div>
+    <p class="side-label">SECURITY CONTROL</p>
+    <nav id="nav">
+      <button class="nav-item active" data-page="overview">▦ <span>Overview</span></button>
+      <button class="nav-item" data-page="devices">▣ <span>Virtual Devices (4)</span></button>
+      <button class="nav-item" data-page="updates">⌁ <span>3D Attack Simulation</span></button>
+      <button class="nav-item" data-page="investigations">🔍 <span>Incident Forensics</span></button>
+      <button class="nav-item" data-page="alerts">⚠ <span>Attack Alerts</span></button>
+      <button class="nav-item" data-page="logs">▤ <span>Security Event Logs</span></button>
+      <button class="nav-item" data-page="anomalies">⚡ <span>Anomaly Rules</span></button>
+      <button class="nav-item" data-page="keys">🔑 <span>Trusted Keys (Ed25519)</span></button>
+      <button class="nav-item" data-page="docker">🐳 <span>Docker Health</span></button>
+      <button class="nav-item" data-page="performance">⏱ <span>Performance Testing</span></button>
+      <button class="nav-item" data-page="threatmodel">🛡 <span>Threat Model & Risk</span></button>
+      <button class="nav-item" data-page="audit">📋 <span>Security Audit Logs</span></button>
+      <button class="nav-item" data-page="reports">📑 <span>Reports & Exports</span></button>
+      <button class="nav-item" data-page="settings">⚙ <span>Settings & Thresholds</span></button>
+    </nav>
+    <div class="side-bottom">
+      <span class="dot green"></span> Software emulation <small>Node.js Prototype Environment</small>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div><span class="crumb">IoT CyberShield /</span> <b id="pageName">Overview</b></div>
+      <div class="top-right">
+        <span class="env"><span class="dot green"></span> EMULATION ACTIVE</span>
+        <button class="btn secondary" id="btnQuickSafeTest" style="padding:6px 12px;min-height:32px;font-size:11px;">▶ Run Safe Test</button>
+        <span class="avatar">CS</span>
+      </div>
+    </header>
+
+    <!-- PAGE 1: OVERVIEW -->
+    <section class="page active" id="page-overview">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">TELEMETRY REGISTRY · SOFTWARE EMULATION ACTIVE</p>
+          <h1>Security Overview</h1>
+          <p class="sub">Monitor virtual IoT devices, firmware integrity, benchmark latency, and active security threats.</p>
+        </div>
+        <div class="heading-actions">
+          <button class="btn secondary" data-goto="performance">Run Benchmark ⏱</button>
+          <button class="btn primary" data-goto="updates">3D Attack Simulation ⌁</button>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <article class="metric">
+          <span>VIRTUAL DEVICES</span>
+          <strong id="metricDevices">04</strong>
+          <small>Configured reference nodes</small>
+        </article>
+        <article class="metric">
+          <span>VERIFIED UPDATES</span>
+          <strong id="metricVerified">00</strong>
+          <small>Checks passed</small>
+        </article>
+        <article class="metric">
+          <span>REJECTED UPDATES</span>
+          <strong id="metricRejected">00</strong>
+          <small>Unsafe requests blocked</small>
+        </article>
+        <article class="metric">
+          <span>ACTIVE ALERTS</span>
+          <strong id="metricAlerts">00</strong>
+          <small>Unacknowledged anomalies</small>
+        </article>
+      </div>
+
+      <div class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Virtual Device Fleet (Exactly 4 Nodes)</h2>
+              <p>Software-emulated devices and firmware policy</p>
+            </div>
+            <button class="text-btn" data-goto="devices">View all →</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>DEVICE</th>
+                  <th>MODEL</th>
+                  <th>FIRMWARE</th>
+                  <th>STATUS</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody id="overviewDeviceRows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Recent Security Events</h2>
+              <p>Latest verification, simulation, and telemetry records</p>
+            </div>
+            <button class="text-btn" data-goto="logs">View logs →</button>
+          </div>
+          <div id="recentEvents" class="event-list"></div>
+        </article>
+      </div>
+
+      <!-- 3D SIMULATION TRIALS SUMMARY (TODAY'S AUTOMATIC UPDATE TRIALS) -->
+      <article class="panel" style="margin-top:20px;">
+        <div class="panel-head">
+          <div>
+            <h2>3D Attack Simulation Trials (Today's Live Records)</h2>
+            <p>Trials executed from the Automatic Firmware Update Server and 3D Simulation</p>
+          </div>
+          <button class="btn secondary" data-goto="updates" style="font-size:11px;min-height:30px;">Open 3D Simulator ⌁</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>TIME</th>
+                <th>TARGET DEVICE</th>
+                <th>SAMPLE PACKAGE</th>
+                <th>TEST TYPE</th>
+                <th>3D ANIMATED RESULT</th>
+                <th>DECISION</th>
+                <th>REASON / CHECKS</th>
+              </tr>
+            </thead>
+            <tbody id="overviewTrialsRows">
+              <tr>
+                <td colspan="7" class="empty" style="text-align:center;padding:16px;">Loading today's 3D simulation trials...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <div class="notice" style="margin-top:16px;">
+        <b>Prototype boundary & Integrity Notice:</b>
+        <span>All 4 devices are virtual software emulators. Attack scenarios are controlled simulations. Uploaded firmware files are cryptographically evaluated and never executed on host. Mandatory checks are enforced on all verified updates.</span>
+      </div>
+    </section>
+
+    <!-- PAGE 2: VIRTUAL DEVICES -->
+    <section class="page" id="page-devices">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">DEVICE REGISTRY · EXACTLY FOUR SUPPORTED MODELS</p>
+          <h1>Virtual Devices</h1>
+          <p class="sub">Select a sandboxed device to inspect its security counter, firmware policy, cryptographic credentials, and interactive hardware simulator.</p>
+        </div>
+      </div>
+      <div class="device-cards" id="deviceCards"></div>
+    </section>
+
+    <!-- PAGE 3: 3D ATTACK SIMULATION & AUTOMATIC FIRMWARE UPDATE SERVER -->
+    <section class="page" id="page-updates">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">AUTOMATIC FIRMWARE SERVER · REAL-TIME 3D ATTACK SIMULATION</p>
+          <h1>3D Attack Simulation</h1>
+          <p class="sub">Automated firmware update server connected to real-time 3D visualization: valid firmware travels securely along the green path with authentic cryptographic data to the device; invalid firmware is intercepted and blocked at the CyberShield firewall along the red path.</p>
+        </div>
+        <div class="heading-actions">
+          <button class="btn secondary" id="btn3dRegenSamples">⟳ Regenerate Samples</button>
+          <button class="btn primary" id="btn3dRunBothAuto">▶ Run Automated Both Tests</button>
+        </div>
+      </div>
+
+      <!-- Simple Mode Switcher: Automatic vs Manual -->
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:14px;">
+        <div class="sim-mode-toggle-group">
+          <button class="sim-mode-tab active" id="btnModeAuto">
+            ⚡ Automatic Mode (One-Click Demo)
+          </button>
+          <button class="sim-mode-tab" id="btnModeManual">
+            ⚙ Manual Mode (Selected Data Test)
+          </button>
+        </div>
+        <div id="modeDescription" style="font-size:12px;color:var(--muted);font-weight:600;">
+          Automatic pipeline: one-click demo of Valid (Green line) then Invalid (Red line blocked).
+        </div>
+      </div>
+
+      <!-- Live Simulation Status Banner -->
+      <div class="sim-status-banner idle" id="sim3dStatusBanner">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="dot green" id="sim3dStatusDot"></span>
+          <span id="sim3dStatusText">Automatic Firmware Update Server Ready · Select a target device and click "Run Automated Both Tests"</span>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn secondary" id="btn3dRunValid" style="padding:4px 10px;min-height:28px;font-size:11px;">✓ Valid Test (Green)</button>
+          <button class="btn secondary" id="btn3dRunInvalid" style="padding:4px 10px;min-height:28px;font-size:11px;">✕ Invalid Test (Red)</button>
+        </div>
+      </div>
+
+      <!-- Target Device Selection Bar -->
+      <div class="panel" style="padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <label style="font-size:12px;font-weight:700;color:var(--muted);margin:0;display:flex;align-items:center;gap:6px;">
+            TARGET IOT DEVICE:
+            <select id="sim3dTargetDevice" style="font-weight:600;font-size:13px;padding:6px 12px;border-radius:5px;border:1px solid var(--border);background:#fff;"></select>
+          </label>
+        </div>
+        <div id="sim3dDeviceSpecs" style="display:flex;align-items:center;gap:14px;font-size:12px;">
+          <span style="color:var(--muted);">Current Firmware: <b id="sim3dDeviceFw">v2.1.0</b></span>
+          <span style="color:var(--muted);">Min Required: <b id="sim3dDeviceMin">v2.0.0</b></span>
+          <span style="color:var(--muted);">Model: <b id="sim3dDeviceModel">Tapo C200</b></span>
+          <span class="badge ok" id="sim3dDeviceRisk">Low Risk</span>
+        </div>
+      </div>
+
+      <!-- 3D WebGL Holographic Simulation Viewport -->
+      <div class="sim-3d-viewport" id="sim3dViewport">
+        <!-- Top HUD overlay -->
+        <div class="sim-3d-hud-top">
+          <div class="sim-3d-hud-pill" id="sim3dHudSourcePill">
+            <span class="dot green"></span>
+            <span>SERVER: 10.0.8.25 (OTA STAGING)</span>
+          </div>
+          <div class="sim-3d-hud-pill" id="sim3dHudBarrierPill">
+            <span class="dot" style="background:#D96C3F;"></span>
+            <span>CYBERSHIELD GATEWAY: MONITORING</span>
+          </div>
+          <div class="sim-3d-hud-pill" id="sim3dHudTargetPill">
+            <span class="dot green"></span>
+            <span id="sim3dHudTargetText">TARGET: DEV-CAM-01 (ONLINE)</span>
+          </div>
+        </div>
+
+        <!-- Floating 3D Data HUD tracking the active packet -->
+        <div class="sim-3d-floating-data-card" id="sim3dFloatingDataCard">
+          <div class="sim-data-badge-title">
+            <span id="dataCardType">📦 VALID FIRMWARE DATA</span>
+            <span class="badge ok" id="dataCardBadge">AUTHENTIC</span>
+          </div>
+          <div class="sim-data-row">
+            <span class="sim-data-label">Payload:</span>
+            <span class="sim-data-val" id="dataCardFileName">--</span>
+          </div>
+          <div class="sim-data-row">
+            <span class="sim-data-label">SHA-256:</span>
+            <span class="sim-data-val" id="dataCardHash">--</span>
+          </div>
+          <div class="sim-data-row">
+            <span class="sim-data-label">Key Authority:</span>
+            <span class="sim-data-val" id="dataCardSigner">--</span>
+          </div>
+          <div class="sim-data-row">
+            <span class="sim-data-label">Status:</span>
+            <span class="sim-data-val" id="dataCardStatus">In Flight...</span>
+          </div>
+        </div>
+
+        <!-- 3D Canvas element -->
+        <canvas id="sim3dCanvas" class="sim-3d-canvas"></canvas>
+
+        <!-- Node labels positioned at the bottom -->
+        <div class="sim-3d-node-label source">
+          <strong style="color:#00F2FE;">OTA UPDATE SERVER</strong>
+          <small>Automated Ingestion Core</small>
+        </div>
+        <div class="sim-3d-node-label barrier">
+          <strong style="color:#D96C3F;">CYBERSHIELD FIREWALL</strong>
+          <small>Ed25519 · SHA-256 · Anti-Rollback</small>
+        </div>
+        <div class="sim-3d-node-label target">
+          <strong style="color:#27845B;" id="sim3dTargetLabel">IOT DEVICE</strong>
+          <small id="sim3dTargetSubLabel">Software Emulation Node</small>
+        </div>
+
+        <!-- Viewport Controls Overlay -->
+        <div class="sim-3d-controls-overlay">
+          <button class="sim-btn-icon" id="btn3dResetCam" title="Reset Camera View">⌂ Reset View</button>
+          <button class="sim-btn-icon" id="btn3dToggleRotate" title="Toggle Auto-Rotation">↻ Rotate</button>
+        </div>
+      </div>
+
+      <!-- Telemetry Counters for 3D Engine -->
+      <div class="sim-telemetry-strip">
+        <article class="sim-telemetry-card">
+          <span>TRIALS TODAY</span>
+          <strong id="stat3dTrials">00</strong>
+          <small>Total 3D test executions</small>
+        </article>
+        <article class="sim-telemetry-card">
+          <span>VALID DELIVERED</span>
+          <strong id="stat3dValid" style="color:var(--success);">00</strong>
+          <small>Green path · Updates applied</small>
+        </article>
+        <article class="sim-telemetry-card">
+          <span>ATTACKS BLOCKED</span>
+          <strong id="stat3dBlocked" style="color:var(--danger);">00</strong>
+          <small>Red path · Intercepted at barrier</small>
+        </article>
+        <article class="sim-telemetry-card">
+          <span>VERIFICATION LATENCY</span>
+          <strong id="stat3dLatency">-- ms</strong>
+          <small>Cryptographic check speed</small>
+        </article>
+      </div>
+
+      <!-- 2-Column Grid: Mode-Specific Data Panels & Live Verification Checks -->
+      <div class="grid two">
+        <!-- Column 1: Mode-Specific Data Panel -->
+        <div>
+          <!-- AUTOMATIC MODE PANEL -->
+          <article class="panel" id="simPanelAuto">
+            <div class="panel-head">
+              <div>
+                <h2>Automatic Update Pipeline</h2>
+                <p>One-click automated demonstration of valid delivery and attack containment</p>
+              </div>
+              <span class="badge ok">AUTOMATIC</span>
+            </div>
+            <div style="background:#FAF8F5;border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:14px;">
+              <p style="font-size:12px;color:#334155;margin:0 0 10px;line-height:1.45;">
+                In <strong>Automatic Mode</strong>, the server automatically executes both tests sequentially to demonstrate the green and red results without manual intervention:
+              </p>
+              <div style="font-size:11px;display:flex;flex-direction:column;gap:6px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span class="badge ok">TEST 1</span>
+                  <span><strong>Valid Firmware:</strong> Green animated line carries authentic package to device (v2.2.0 applied).</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <span class="badge bad">TEST 2</span>
+                  <span><strong>Invalid Attack:</strong> Red animated line is intercepted and blocked at CyberShield barrier.</span>
+                </div>
+              </div>
+            </div>
+            <button class="btn primary full" id="btnAutoStartFull" style="min-height:42px;font-size:13px;font-weight:700;">
+              ▶ Run Automated Both Tests (Demonstration)
+            </button>
+          </article>
+
+          <!-- MANUAL MODE PANEL -->
+          <article class="panel" id="simPanelManual" style="display:none;">
+            <div class="panel-head">
+              <div>
+                <h2>Manual Firmware Test Data</h2>
+                <p>Select an individual payload to transmit and inspect manually</p>
+              </div>
+              <span class="badge neutral">MANUAL</span>
+            </div>
+
+            <!-- Manual Sample 1: Valid Package -->
+            <div class="pkg-card valid">
+              <div class="pkg-card-head">
+                <div>
+                  <h4 style="color:var(--success);">Dataset 1: Valid Firmware Payload</h4>
+                  <small style="color:var(--muted);" id="sampleValidFileName">firmware_DEV-CAM-01_v2.2.0_VALID.bin</small>
+                </div>
+                <span class="badge ok">AUTHENTIC</span>
+              </div>
+              <p style="font-size:12px;margin:0 0 8px;color:#334155;">
+                Signed with Hardware Root Key (<code>dev-ed25519-primary</code>). Monotonic version policy valid. SHA-256 authentic.
+              </p>
+              <div class="pkg-hash-box">
+                <strong>SHA-256:</strong> <span id="sampleValidHash">calculating...</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:11px;">
+                <span style="color:var(--muted);">Key: <strong>dev-ed25519-primary</strong></span>
+                <div style="display:flex;gap:6px;">
+                  <a id="btnDownloadValid" href="#" download class="btn secondary" style="font-size:11px;min-height:28px;padding:4px 8px;">Download ⤓</a>
+                  <button class="btn primary" id="btnTestValidDirect" style="font-size:11px;min-height:28px;padding:4px 10px;">▶ Transmit Valid (Green)</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Manual Sample 2: Invalid Package -->
+            <div class="pkg-card invalid">
+              <div class="pkg-card-head">
+                <div>
+                  <h4 style="color:var(--danger);">Dataset 2: Invalid Attack Payload</h4>
+                  <small style="color:var(--muted);" id="sampleInvalidFileName">firmware_DEV-CAM-01_v2.2.0_INVALID_TAMPERED.bin</small>
+                </div>
+                <span class="badge bad">ADVERSARIAL</span>
+              </div>
+              <p style="font-size:12px;margin:0 0 8px;color:#334155;">
+                Adversarial code injection simulation with forged Ed25519 signature and checksum mismatch.
+              </p>
+              <div class="pkg-hash-box">
+                <strong>SHA-256:</strong> <span id="sampleInvalidHash">calculating...</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;font-size:11px;">
+                <span style="color:var(--muted);color:var(--danger);">Forged signature (0xbad...)</span>
+                <div style="display:flex;gap:6px;">
+                  <a id="btnDownloadInvalid" href="#" download class="btn secondary" style="font-size:11px;min-height:28px;padding:4px 8px;">Download ⤓</a>
+                  <button class="btn secondary" id="btnTestInvalidDirect" style="font-size:11px;min-height:28px;padding:4px 10px;border-color:var(--danger);color:var(--danger);">✕ Launch Attack (Red)</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Column 2: Live Verification Breakdown -->
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>CyberShield Verification Engine</h2>
+              <p>Evaluation results for the active or latest 3D simulation trial</p>
+            </div>
+            <span class="badge neutral" id="sim3dDecisionBadge">READY</span>
+          </div>
+
+          <div id="sim3dVerifySummary" style="margin-bottom:14px;padding:12px;background:#faf8f5;border-radius:6px;border:1px solid var(--border);">
+            <div style="font-size:12px;"><strong>Trial ID:</strong> <span id="sim3dTrialId">None</span> · <strong>Mode:</strong> Software Emulation</div>
+            <div style="font-size:12px;margin-top:4px;"><strong>Decision Reason:</strong> <span id="sim3dDecisionReason" style="color:var(--muted);">Select a test above to trigger cryptographic evaluation.</span></div>
+          </div>
+
+          <div class="timeline-stepper" id="sim3dCheckSteps">
+            <div class="timeline-step">
+              <div class="timeline-dot"></div>
+              <div style="font-size:13px;font-weight:700;">1. Container & Manifest Structure <span class="badge neutral">PENDING</span></div>
+              <p style="font-size:12px;color:var(--muted);margin:2px 0 0;">Inspect container headers and JSON manifest schema.</p>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-dot"></div>
+              <div style="font-size:13px;font-weight:700;">2. Cryptographic SHA-256 Digest Match <span class="badge neutral">PENDING</span></div>
+              <p style="font-size:12px;color:var(--muted);margin:2px 0 0;">Calculates binary checksum and compares against manifest digest.</p>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-dot"></div>
+              <div style="font-size:13px;font-weight:700;">3. Trusted Root Key Lookup (Ed25519) <span class="badge neutral">PENDING</span></div>
+              <p style="font-size:12px;color:var(--muted);margin:2px 0 0;">Verifies key ID exists in trusted keystore registry.</p>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-dot"></div>
+              <div style="font-size:13px;font-weight:700;">4. Digital Signature Authenticity <span class="badge neutral">PENDING</span></div>
+              <p style="font-size:12px;color:var(--muted);margin:2px 0 0;">Performs Ed25519 asymmetric signature cryptographic verification.</p>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-dot"></div>
+              <div style="font-size:13px;font-weight:700;">5. Monotonic Anti-Rollback Policy <span class="badge neutral">PENDING</span></div>
+              <p style="font-size:12px;color:var(--muted);margin:2px 0 0;">Enforces target version >= minimum required hardware version.</p>
+            </div>
+            <div class="timeline-step">
+              <div class="timeline-dot"></div>
+              <div style="font-size:13px;font-weight:700;">6. Anti-Replay Nonce Ledger <span class="badge neutral">PENDING</span></div>
+              <p style="font-size:12px;color:var(--muted);margin:2px 0 0;">Checks and records request transaction token against replay ledger.</p>
+            </div>
+          </div>
+          <div id="sim3dIncidentAlert" style="display:none;margin-top:14px;"></div>
+        </article>
+      </div>
+
+      <!-- Full Table of 3D Simulation Trials Run Today -->
+      <article class="panel" style="margin-top:20px;">
+        <div class="panel-head">
+          <div>
+            <h2>3D Simulation Trials History (Today)</h2>
+            <p>Chronological ledger of valid OTA deliveries and intercepted attack simulations</p>
+          </div>
+          <span class="badge neutral" id="badgeTrialsCount">0 Trials</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>TIME</th>
+                <th>TRIAL ID</th>
+                <th>DEVICE</th>
+                <th>PACKAGE TYPE</th>
+                <th>VERSION</th>
+                <th>3D ANIMATION</th>
+                <th>OUTCOME</th>
+                <th>LATENCY</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="sim3dTrialsHistoryRows">
+              <tr>
+                <td colspan="9" class="empty" style="text-align:center;padding:20px;">No trials executed yet. Click "Run Automated Both Tests" above to start!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- PAGE 4: ATTACK SIMULATION CONSOLIDATED -->
+    <section class="page" id="page-lab">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">ATTACK SIMULATION · UNIFIED 3D ENGINE</p>
+          <h1>Attack Simulation</h1>
+          <p class="sub">Attack simulations and firmware update verifications are unified into the real-time 3D Attack Simulation.</p>
+        </div>
+        <div class="heading-actions">
+          <button class="btn primary" onclick="go('updates')">▶ Open 3D Attack Simulation</button>
+        </div>
+      </div>
+      <article class="panel" style="text-align:center;padding:48px 24px;">
+        <div style="font-size:36px;margin-bottom:12px;">⌁</div>
+        <h2 style="margin-bottom:8px;font-size:18px;">Attack Simulation is Live in 3D</h2>
+        <p style="color:var(--muted);max-width:540px;margin:0 auto 24px;font-size:13px;line-height:1.5;">
+          All simulated attack vectors (signature forgery, tamper injection, rollback) are now tested directly via the <strong>3D Attack Simulation</strong> with automatic green-line delivery and red-line barrier containment.
+        </p>
+        <button class="btn primary" onclick="go('updates')" style="padding:10px 24px;font-size:13px;font-weight:700;">
+          Launch 3D Attack Simulation View ⌁
+        </button>
+      </article>
+    </section>
+
+    <!-- PAGE 5: INCIDENT INVESTIGATIONS & FORENSICS (22 FIELDS) -->
+    <section class="page" id="page-investigations">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">ATTACK FORENSICS · WHERE, HOW, WHEN & WHAT HAPPENED</p>
+          <h1>Incident Investigations</h1>
+          <p class="sub">Comprehensive investigation records displaying the 22 required forensic dimensions, chronological events, and response outcomes.</p>
+        </div>
+        <div class="heading-actions">
+          <button class="btn secondary" id="btnExportIncidentsJson">Export JSON ⤓</button>
+          <button class="btn secondary" id="btnRefreshIncidents">Refresh ↻</button>
+        </div>
+      </div>
+
+      <div class="grid two">
+        <!-- Incidents List -->
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Detected Incidents</h2>
+              <p>Click any incident to open full forensic investigation</p>
+            </div>
+            <span class="badge warn" id="incidentCountBadge">0 Recorded</span>
+          </div>
+          <div id="incidentsList" class="event-list" style="max-height:600px;overflow-y:auto;">
+            <div class="empty">No incidents recorded yet. Run an attack test in the simulator to generate an incident.</div>
+          </div>
+        </article>
+
+        <!-- Incident Detailed Forensic Report -->
+        <article class="panel" id="incidentDetailPanel">
+          <div class="panel-head">
+            <div>
+              <h2>Forensic Details (22 Fields)</h2>
+              <p>Comprehensive incident dossier</p>
+            </div>
+            <span class="badge neutral" id="detailStatusBadge">SELECT INCIDENT</span>
+          </div>
+          <div id="incidentDetailContent" class="empty">
+            Select an incident from the list on the left to inspect its root-cause analysis, chronological events, and evidence.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PAGE 6: ATTACK ALERTS -->
+    <section class="page" id="page-alerts">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">RULE-BASED ANOMALY DETECTION</p>
+          <h1>Attack Alerts</h1>
+          <p class="sub">Active rule violations, authentication anomalies, and telemetry out-of-bounds alerts.</p>
+        </div>
+        <button class="btn secondary" id="btnRefreshAlerts">Refresh Alerts ↻</button>
+      </div>
+      <article class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>TIMESTAMP</th>
+                <th>DEVICE</th>
+                <th>RULE ID</th>
+                <th>SEVERITY</th>
+                <th>EVIDENCE</th>
+                <th>STATUS</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="alertRows"></tbody>
+          </table>
+        </div>
+        <div id="noAlerts" class="empty">No active anomaly alerts in database.</div>
+      </article>
+    </section>
+
+    <!-- PAGE 7: SECURITY EVENT LOGS -->
+    <section class="page" id="page-logs">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">AUDIT TRAIL · FILTERABLE SQLITE RECORDS</p>
+          <h1>Security Event Logs</h1>
+          <p class="sub">Recorded verification results, threat tests, and controlled simulations.</p>
+        </div>
+        <div class="heading-actions">
+          <button class="btn secondary" id="btnExportEventsCsv">Export CSV ⤓</button>
+          <button class="btn secondary" id="refreshLogs">Refresh logs ↻</button>
+        </div>
+      </div>
+
+      <!-- Filters Bar -->
+      <article class="panel form-panel" style="margin-bottom:16px;">
+        <div class="config-grid">
+          <label>Filter by Device:
+            <select id="filterLogDevice">
+              <option value="ALL">All Devices</option>
+              <option value="DEV-CAM-01">DEV-CAM-01 (Tapo C200)</option>
+              <option value="DEV-LCK-02">DEV-LCK-02 (ESP32 Locker)</option>
+              <option value="DEV-ENV-03">DEV-ENV-03 (DHT22 Sensor)</option>
+              <option value="DEV-RTR-04">DEV-RTR-04 (Archer C6)</option>
+            </select>
+          </label>
+          <label>Filter by Severity:
+            <select id="filterLogSeverity">
+              <option value="ALL">All Severities</option>
+              <option value="INFO">INFO</option>
+              <option value="MEDIUM">MEDIUM / WARN</option>
+              <option value="HIGH">HIGH</option>
+              <option value="CRITICAL">CRITICAL</option>
+            </select>
+          </label>
+          <label>Search Query:
+            <input id="filterLogSearch" placeholder="Search event ID, reason, outcome...">
+          </label>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>TIME (UTC)</th>
+                <th>DEVICE</th>
+                <th>EVENT TYPE</th>
+                <th>SEVERITY</th>
+                <th>RESULT</th>
+                <th>OUTCOME</th>
+                <th>DESCRIPTION</th>
+              </tr>
+            </thead>
+            <tbody id="logRows"></tbody>
+          </table>
+        </div>
+        <div id="noLogs" class="empty">No events recorded yet. Run a verification or attack simulation to create an audit record.</div>
+      </article>
+    </section>
+
+    <!-- PAGE 8: ANOMALY RULES -->
+    <section class="page" id="page-anomalies">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">CONFIGURABLE DETECTION RULES</p>
+          <h1>Anomaly Detection Rules</h1>
+          <p class="sub">Inspect and adjust thresholds for explainable attack detection and health monitoring rules.</p>
+        </div>
+      </div>
+      <article class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>RULE ID</th>
+                <th>RULE NAME</th>
+                <th>CATEGORY</th>
+                <th>THRESHOLD</th>
+                <th>WINDOW</th>
+                <th>SEVERITY</th>
+                <th>DESCRIPTION</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="anomalyRuleRows"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- PAGE 9: TRUSTED KEYS (Ed25519) -->
+    <section class="page" id="page-keys">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">ASYMMETRIC CRYPTOGRAPHY · HARDWARE ROOT OF TRUST</p>
+          <h1>Trusted Signing Keys (Ed25519)</h1>
+          <p class="sub">Manage active Ed25519 public keys used for firmware authenticity verification. Private keys are securely retained on the backend.</p>
+        </div>
+        <button class="btn primary" id="btnRotateKey">Rotate / Generate New Key ⟳</button>
+      </div>
+
+      <article class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>KEY ID</th>
+                <th>KEY ALIAS</th>
+                <th>ALGORITHM</th>
+                <th>PUBLIC KEY HEX (32-BYTE)</th>
+                <th>STATUS</th>
+                <th>CREATED AT</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="trustedKeyRows"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- PAGE 10: DOCKER CONTAINER HEALTH -->
+    <section class="page" id="page-docker">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">DOCKER ENGINE INTERFACE · CONTAINERIZED EMULATION</p>
+          <h1>Docker Container Health</h1>
+          <p class="sub">Real check of Docker daemon connectivity and container specifications for the four approved device emulators.</p>
+        </div>
+        <button class="btn secondary" id="btnRefreshDocker">Re-check Docker Status ↻</button>
+      </div>
+
+      <article class="panel" style="margin-bottom:20px;">
+        <div class="panel-head">
+          <div>
+            <h2>Docker Engine Status</h2>
+            <p id="dockerMessageText">Checking Docker daemon...</p>
+          </div>
+          <span class="badge neutral" id="dockerStatusBadge">PROBING...</span>
+        </div>
+        <div class="resource-grid">
+          <div class="res-box">
+            <span>DOCKER CLI</span>
+            <strong id="dockerCliText">--</strong>
+            <small>Command-line binary</small>
+          </div>
+          <div class="res-box">
+            <span>DAEMON SOCKET</span>
+            <strong id="dockerSocketText">--</strong>
+            <small>/var/run/docker.sock</small>
+          </div>
+          <div class="res-box">
+            <span>EMULATOR CONTAINERS</span>
+            <strong>4 Approved</strong>
+            <small>Non-root, CPU/RAM limits</small>
+          </div>
+          <div class="res-box">
+            <span>OPERATIONAL MODE</span>
+            <strong id="dockerModeText">Software Emulation</strong>
+            <small>Safe prototype</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Approved Docker Emulator Services (docker-compose.yml)</h2>
+            <p>Pre-configured security baselines for the four reference devices</p>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>DEVICE</th>
+                <th>SERVICE</th>
+                <th>IMAGE</th>
+                <th>USER</th>
+                <th>CPU LIMIT</th>
+                <th>RAM LIMIT</th>
+                <th>PORTS</th>
+                <th>CAPABILITIES</th>
+              </tr>
+            </thead>
+            <tbody id="approvedDockerRows"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- PAGE 11: PERFORMANCE TESTING (FEATURE 1) -->
+    <section class="page" id="page-performance">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">HIGH-RESOLUTION BENCHMARKS · BIGINT TIMERS</p>
+          <h1>Performance Overhead Measurement</h1>
+          <p class="sub">Measure cryptographic overhead, operation latencies, and process resource utilization under high-resolution timers.</p>
+        </div>
+        <div class="heading-actions">
+          <button class="btn secondary" id="btnExportBenchmarkCsv">Export CSV ⤓</button>
+          <button class="btn secondary" id="btnStopBenchmark" disabled>Stop Benchmark ⏹</button>
+          <button class="btn primary" id="btnRunBenchmark">Run Benchmark ▶</button>
+        </div>
+      </div>
+
+      <div class="env-banner">
+        <div class="env-badge-group">
+          <span class="pill-tag"><strong>Runtime:</strong> <span id="envNodeVersion">Node.js</span></span>
+          <span class="pill-tag"><strong>OS/Arch:</strong> <span id="envPlatform">linux-x64</span></span>
+          <span class="pill-tag"><strong>Logical Cores:</strong> <span id="envCores">4</span></span>
+          <span class="pill-tag"><strong>Process Scope:</strong> Node.js PID Only</span>
+        </div>
+        <p class="env-note">
+          <strong>Measurement Scope Notice:</strong> CPU and memory figures represent the single Node.js application process (PID), not the host container or physical machine. Cumulative CPU time is presented in milliseconds. Baseline processing is executed strictly for comparative benchmarking; mandatory security verification is never bypassed for actual updates.
+        </p>
+      </div>
+
+      <article class="panel form-panel" style="margin-bottom: 20px;">
+        <div class="panel-head">
+          <div>
+            <h2>Benchmark Parameters</h2>
+            <p>Configure virtual fleet size and workload parameters for high-resolution measurement</p>
+          </div>
+          <span class="badge ok" id="benchStatusBadge">READY</span>
+        </div>
+        <div class="config-grid">
+          <label>Virtual Fleet Size
+            <select id="benchFleetSize">
+              <option value="1">1 Device (Single Node)</option>
+              <option value="5" selected>5 Devices (Small Fleet)</option>
+              <option value="10">10 Devices (Medium Fleet)</option>
+              <option value="20">20 Devices (Large Fleet)</option>
+            </select>
+          </label>
+          <label>Test Runs / Iterations
+            <select id="benchTestRuns">
+              <option value="1">1 Run</option>
+              <option value="3" selected>3 Runs (Averaged)</option>
+              <option value="5">5 Runs (Statistical)</option>
+              <option value="10">10 Runs (High Precision)</option>
+            </select>
+          </label>
+          <label>Test Firmware Package Size
+            <select id="benchPackageSize">
+              <option value="65536">64 KB (Microcontroller bootloader)</option>
+              <option value="262144" selected>256 KB (Standard RTOS firmware)</option>
+              <option value="1048576">1 MB (Full embedded Linux kernel)</option>
+              <option value="2097152">2 MB (Dual-bank image)</option>
+            </select>
+          </label>
+          <label>Edge Failure Injection Test
+            <select id="benchSimulateFailures">
+              <option value="false" selected>Normal (100% Valid packages)</option>
+              <option value="true">Inject Simulated Bit-flips (Tests failure count)</option>
+            </select>
+          </label>
+        </div>
+      </article>
+
+      <div class="metrics">
+        <article class="metric">
+          <span>BASELINE PROCESSING</span>
+          <strong id="metricBaselineTime">--</strong>
+          <small id="metricBaselineSub">Unverified baseline (ms)</small>
+        </article>
+        <article class="metric">
+          <span>SECURE PROCESSING</span>
+          <strong id="metricSecureTime">--</strong>
+          <small id="metricSecureSub">Mandatory security checks (ms)</small>
+        </article>
+        <article class="metric">
+          <span>SECURITY OVERHEAD</span>
+          <strong id="metricOverheadMs">--</strong>
+          <small id="metricOverheadMsSub">Secure − Baseline (ms)</small>
+        </article>
+        <article class="metric">
+          <span>OVERHEAD PERCENTAGE</span>
+          <strong id="metricOverheadPct">--</strong>
+          <small id="metricOverheadPctSub">((Secure − Base) / Base) %</small>
+        </article>
+      </div>
+
+      <div class="grid two">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Operation Timing Breakdown</h2>
+              <p>High-resolution duration per security verification stage</p>
+            </div>
+            <span class="badge neutral" id="opsTimerBadge">BigInt Precision</span>
+          </div>
+          <div id="chartBreakdown" class="chart-container">
+            <div class="empty">Run a benchmark to generate operation breakdown timing bars.</div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <h2>Fleet Scaling Workload</h2>
+              <p>Average processing latency across fleet sizes (1, 5, 10, 20)</p>
+            </div>
+            <span class="badge neutral">Software Emulation</span>
+          </div>
+          <div id="chartFleetScaling" class="chart-container">
+            <div class="empty">Run a benchmark to plot the fleet scaling curve.</div>
+          </div>
+        </article>
+      </div>
+
+      <article class="panel" style="margin-bottom: 20px;">
+        <div class="panel-head">
+          <div>
+            <h2>Process Resource Utilization (Node.js PID)</h2>
+            <p>Direct measurements from process.cpuUsage() and process.memoryUsage()</p>
+          </div>
+        </div>
+        <div class="resource-grid" id="resourceMetricsGrid">
+          <div class="res-box">
+            <span>CPU USER TIME</span>
+            <strong id="resCpuUser">--</strong>
+            <small>V8 JS execution delta</small>
+          </div>
+          <div class="res-box">
+            <span>CPU SYSTEM TIME</span>
+            <strong id="resCpuSystem">--</strong>
+            <small>OS kernel syscalls delta</small>
+          </div>
+          <div class="res-box">
+            <span>PROCESS RSS MEMORY</span>
+            <strong id="resMemRss">--</strong>
+            <small>Resident set size</small>
+          </div>
+          <div class="res-box">
+            <span>V8 HEAP USED</span>
+            <strong id="resMemHeap">--</strong>
+            <small>Active JS objects memory</small>
+          </div>
+        </div>
+      </article>
+
+      <article class="panel">
+        <div class="panel-head">
+          <div>
+            <h2>Persistent Benchmark History (SQLite)</h2>
+            <p>Stored records from cybershield.db</p>
+          </div>
+          <button class="text-btn" id="btnRefreshBenchmarkHistory">Refresh history ↻</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>TIMESTAMP</th>
+                <th>FLEET</th>
+                <th>RUNS</th>
+                <th>BASELINE</th>
+                <th>SECURE</th>
+                <th>OVERHEAD</th>
+                <th>OVERHEAD %</th>
+                <th>SUCCESS / FAIL</th>
+                <th>MEMORY</th>
+                <th>ACTION</th>
+              </tr>
+            </thead>
+            <tbody id="benchmarkHistoryRows"></tbody>
+          </table>
+        </div>
+        <div id="noBenchmarkHistory" class="empty">No benchmark runs saved in database yet.</div>
+      </article>
+    </section>
+
+    <!-- PAGE 12: THREAT MODEL & RISK (FEATURE 2) -->
+    <section class="page" id="page-threatmodel">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">RISK MODELING · ISO/SAE 21434 & NIST ALIGNED</p>
+          <h1>Threat Model & Security Analysis</h1>
+          <p class="sub">Structured analysis of protected assets, attacker capabilities, trust boundaries, and risk register.</p>
+        </div>
+        <div class="heading-actions">
+          <button class="btn secondary" id="btnExportThreatsCsv">Export Register (CSV) ⤓</button>
+          <button class="btn primary" id="btnOpenThreatReport">View Full Report ↗</button>
+        </div>
+      </div>
+
+      <div class="methodology-banner">
+        <strong>Risk Scoring Methodology:</strong> Risk Score = Likelihood (1–5 Scale) × Impact (1–5 Scale).
+        Risk bands: <span class="badge ok">Low (1–4)</span>, <span class="badge warn">Medium (5–9)</span>, <span class="badge bad">High (10–14)</span>, <span class="badge crit">Critical (15–25)</span>.
+      </div>
+
+      <div class="tab-bar">
+        <button class="tab-btn active" data-threattab="register">Threat Register (12 Threats)</button>
+        <button class="tab-btn" data-threattab="assets">Protected Assets (9 Assets)</button>
+        <button class="tab-btn" data-threattab="profiles">Attacker Profiles (7 Profiles)</button>
+        <button class="tab-btn" data-threattab="boundaries">Trust Boundaries (7 Boundaries)</button>
+        <button class="tab-btn" data-threattab="limitations">Security Limitations (8 Constraints)</button>
+      </div>
+
+      <div class="threat-subtab active" id="subtab-register">
+        <div class="filter-bar">
+          <div class="filter-group">
+            <label>Filter by Risk:
+              <select id="filterThreatRisk">
+                <option value="ALL">All Risk Levels</option>
+                <option value="Critical">Critical (15-25)</option>
+                <option value="High">High (10-14)</option>
+                <option value="Medium">Medium (5-9)</option>
+                <option value="Low">Low (1-4)</option>
+              </select>
+            </label>
+            <label>Filter by Status:
+              <select id="filterThreatStatus">
+                <option value="ALL">All Controls</option>
+                <option value="Implemented">Implemented</option>
+                <option value="Planned">Planned</option>
+              </select>
+            </label>
+          </div>
+          <span class="count-badge" id="threatCountBadge">Showing 12 threats</span>
+        </div>
+        <div class="threat-cards" id="threatCardList"></div>
+      </div>
+
+      <div class="threat-subtab" id="subtab-assets">
+        <div class="asset-grid" id="assetGrid"></div>
+      </div>
+
+      <div class="threat-subtab" id="subtab-profiles">
+        <div class="profile-cards" id="profileCardList"></div>
+      </div>
+
+      <div class="threat-subtab" id="subtab-boundaries">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>BOUNDARY</th>
+                <th>FLOW</th>
+                <th>POTENTIAL THREAT VECTORS</th>
+                <th>REQUIRED SECURITY CHECKS</th>
+              </tr>
+            </thead>
+            <tbody id="boundaryRows"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="threat-subtab" id="subtab-limitations">
+        <div class="limitations-container" id="limitationsContainer"></div>
+      </div>
+    </section>
+
+    <!-- PAGE 13: SECURITY AUDIT LOGS -->
+    <section class="page" id="page-audit">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">IMMUTABLE ADMINISTRATIVE RECORD</p>
+          <h1>Security Audit Logs</h1>
+          <p class="sub">Auditable history of administrative actions, key rotations, threshold updates, and incident resolutions.</p>
+        </div>
+        <button class="btn secondary" id="btnRefreshAudit">Refresh Audit Logs ↻</button>
+      </div>
+      <article class="panel">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>TIMESTAMP</th>
+                <th>ACTOR</th>
+                <th>ACTION</th>
+                <th>TARGET</th>
+                <th>DETAILS</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody id="auditRows"></tbody>
+          </table>
+        </div>
+      </article>
+    </section>
+
+    <!-- PAGE 14: REPORTS & EXPORTS -->
+    <section class="page" id="page-reports">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">DATA COMPLIANCE & EXPORT SUITE</p>
+          <h1>Reports & Data Exports</h1>
+          <p class="sub">Download genuine reports and datasets derived directly from stored SQLite records.</p>
+        </div>
+      </div>
+
+      <div class="grid two">
+        <article class="panel">
+          <h2>Forensic & Incident Reports</h2>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px;">
+            <div class="pkg-download-card">
+              <div class="pkg-download-info">
+                <strong>Incident Investigations Dossier (JSON)</strong>
+                <small>22 required forensic dimensions, chronological events, and analyst notes</small>
+              </div>
+              <a href="/api/incidents/export-json" download class="btn primary">Export JSON ⤓</a>
+            </div>
+            <div class="pkg-download-card">
+              <div class="pkg-download-info">
+                <strong>Security Event Logs (CSV)</strong>
+                <small>Complete telemetry and security audit ledger</small>
+              </div>
+              <a href="/api/events/export-csv" download class="btn secondary">Export CSV ⤓</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel">
+          <h2>Benchmarking & Threat Modeling</h2>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:16px;">
+            <div class="pkg-download-card">
+              <div class="pkg-download-info">
+                <strong>Threat Model Report (HTML)</strong>
+                <small>Executive security analysis report with risk heatmaps and ISO/SAE alignment</small>
+              </div>
+              <a href="/api/threats/report" target="_blank" class="btn primary">View HTML ↗</a>
+            </div>
+            <div class="pkg-download-card">
+              <div class="pkg-download-info">
+                <strong>Threat Register (CSV)</strong>
+                <small>12 documented threats with likelihood × impact risk matrix</small>
+              </div>
+              <a href="/api/threats/export-csv" download class="btn secondary">Export CSV ⤓</a>
+            </div>
+            <div class="pkg-download-card">
+              <div class="pkg-download-info">
+                <strong>Performance Benchmarks History (CSV)</strong>
+                <small>High-resolution operation timings and process resource usage</small>
+              </div>
+              <a href="/api/benchmark/export-csv" download class="btn secondary">Export CSV ⤓</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- PAGE 15: SETTINGS & THRESHOLDS -->
+    <section class="page" id="page-settings">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow">SYSTEM CONFIGURATION</p>
+          <h1>Settings & Thresholds</h1>
+          <p class="sub">Adjust platform detection sensitivities, lockout thresholds, and environmental limits.</p>
+        </div>
+      </div>
+
+      <div class="grid two">
+        <article class="panel form-panel">
+          <h2>Detection Engine Thresholds</h2>
+          <form id="settingsForm">
+            <label>Failed Login/PIN Lockout Threshold (attempts)
+              <input type="number" id="settingAuthThreshold" min="1" max="10" required>
+            </label>
+            <label>Lockout Duration (seconds)
+              <input type="number" id="settingLockoutDuration" min="10" max="3600" required>
+            </label>
+            <label>Max Firmware Package Upload Size (MB)
+              <input type="number" id="settingMaxUploadMb" min="1" max="50" required>
+            </label>
+            <label>DHT22 Temp Alert Upper Limit (°C)
+              <input type="number" id="settingTempMax" min="30" max="80" required>
+            </label>
+            <label>DHT22 Humidity Alert Upper Limit (%)
+              <input type="number" id="settingHumMax" min="60" max="100" required>
+            </label>
+            <button class="btn primary full" type="submit">Save Threshold Settings</button>
+          </form>
+        </article>
+
+        <article class="panel form-panel">
+          <h2>Platform Management & Data Reset</h2>
+          <p style="font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:16px;">
+            Reset transient events, active alerts, and test incidents while preserving the core device registry and cryptographic keystore.
+          </p>
+          <button class="btn secondary full" id="btnResetDemoState" style="color:var(--danger);border-color:var(--danger);">
+            ⚠ Reset Transient Simulation & Test Data
+          </button>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      IoT CyberShield Platform v2.0 · Software Emulation & Secure OTA Update Verification
+      <span>Node.js 22 · Ed25519 · SHA-256 · SQLite · Exactly 4 Supported IoT Device Models</span>
+    </footer>
+  </main>
+</div>
+
+<!-- Modal 1: Interactive Device Console -->
+<div class="modal-overlay" id="deviceModal" style="display:none;">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2 id="modalDeviceTitle">Device Console</h2>
+      <button class="btn secondary" id="btnCloseDeviceModal">Close ✕</button>
+    </div>
+    <div class="modal-body" id="deviceModalBody">
+      <div class="empty">Loading device console...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal 2: Report Viewer -->
+<div class="modal-overlay" id="reportModal" style="display:none;">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Threat Model & Security Analysis Report</h2>
+      <div>
+        <button class="btn secondary" id="btnPrintModalReport">Print / PDF ⎙</button>
+        <button class="btn secondary" id="btnCloseModalReport">Close ✕</button>
+      </div>
+    </div>
+    <div class="modal-body" id="reportModalContent">
+      <div class="empty">Loading report...</div>
+    </div>
+  </div>
+</div>
+
+<script src="/three.min.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
